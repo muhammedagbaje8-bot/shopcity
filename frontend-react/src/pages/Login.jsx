@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext.jsx';
+import API_BASE from '../api';
 
 const GOOGLE_CLIENT_ID = 'YOUR_NEW_ECOMMERCE_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
@@ -15,7 +16,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
-    const res = await fetch('/login', {
+    const res = await fetch('${API_BASE}/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -28,7 +29,7 @@ export default function Login() {
   }
 
   async function handleGoogleResponse(response) {
-    const res = await fetch('/auth/google', {
+    const res = await fetch('${API_BASE}/auth/google', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

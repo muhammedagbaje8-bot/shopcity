@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE from '../api';
 
 const STATUSES = ['pending', 'shipped', 'delivered'];
 
@@ -10,7 +11,7 @@ export default function AdminOrders() {
   function loadOrders() {
     setLoading(true);
     setError(false);
-    fetch('/admin/orders', { credentials: 'include' })
+    fetch('${API_BASE}/admin/orders', { credentials: 'include' })
       .then(res => res.json())
       .then(data => { setOrders(data); setLoading(false); })
       .catch(() => { setError(true); setLoading(false); });
@@ -19,7 +20,7 @@ export default function AdminOrders() {
   useEffect(() => { loadOrders(); }, []);
 
   async function updateStatus(id, status) {
-    await fetch(`/admin/orders/${id}/status`, {
+    await fetch(`${API_BASE}/admin/orders/${id}/status`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

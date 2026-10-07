@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import API_BASE from '../api';
 
 export default function Cart() {
   const [items, setItems] = useState([]);
@@ -10,7 +11,7 @@ export default function Cart() {
   function loadCart() {
     setLoading(true);
     setError(false);
-    fetch('/cart', { credentials: 'include' })
+    fetch('${API_BASE}/cart', { credentials: 'include' })
       .then(res => res.json())
       .then(data => { setItems(data); setLoading(false); })
       .catch(() => { setError(true); setLoading(false); });
@@ -20,7 +21,7 @@ export default function Cart() {
 
   async function updateQuantity(productId, quantity) {
     if (quantity < 1) return;
-    await fetch(`/cart/${productId}`, {
+    await fetch(`${API_BASE}/cart/${productId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -30,7 +31,7 @@ export default function Cart() {
   }
 
   async function removeItem(productId) {
-    await fetch(`/cart/${productId}`, { method: 'DELETE', credentials: 'include' });
+    await fetch(`${API_BASE}/cart/${productId}`, { method: 'DELETE', credentials: 'include' });
     loadCart();
   }
 

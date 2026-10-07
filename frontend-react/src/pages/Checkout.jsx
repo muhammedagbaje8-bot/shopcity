@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext.jsx';
+import API_BASE from '../api';
 
 const PAYSTACK_PUBLIC_KEY = 'pk_test_bc941021cd4c42daaefbf2425ac9982c63903e93';
 
@@ -17,7 +18,7 @@ export default function Checkout() {
     setError('');
     setProcessing(true);
 
-    const initRes = await fetch('/checkout/initialize', { method: 'POST', credentials: 'include' });
+    const initRes = await fetch('${API_BASE}/checkout/initialize', { method: 'POST', credentials: 'include' });
     const initData = await initRes.json();
     if (!initRes.ok) {
       setError(initData.error);
@@ -31,7 +32,7 @@ export default function Checkout() {
       amount: initData.total,
       ref: initData.reference,
       callback: function (response) {
-        fetch('/orders', {
+        fetch('${API_BASE}/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

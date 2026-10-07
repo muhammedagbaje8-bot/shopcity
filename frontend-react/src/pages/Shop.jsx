@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import API_BASE from '../api';
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ export default function Shop() {
   function loadProducts() {
     setLoading(true);
     setError(false);
-    fetch(`/products?search=${search}`)
+    fetch(`${API_BASE}/products?search=${search}`)
       .then(res => res.json())
       .then(data => { setProducts(data); setLoading(false); })
       .catch(() => { setError(true); setLoading(false); });

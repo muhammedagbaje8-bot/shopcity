@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE from '../api';
 
 const emptyForm = { name: '', description: '', price_cents: '', image_url: '', stock_quantity: '', category: '' };
 
@@ -12,7 +13,7 @@ export default function AdminProducts() {
   function loadProducts() {
     setLoading(true);
     setError(false);
-    fetch('/products')
+    fetch('${API_BASE}/products')
       .then(res => res.json())
       .then(data => { setProducts(data); setLoading(false); })
       .catch(() => { setError(true); setLoading(false); });
@@ -42,7 +43,7 @@ export default function AdminProducts() {
   }
 
   async function deleteProduct(id) {
-    await fetch(`/admin/products/${id}`, { method: 'DELETE', credentials: 'include' });
+    await fetch(`${API_BASE}/admin/products/${id}`, { method: 'DELETE', credentials: 'include' });
     loadProducts();
   }
 

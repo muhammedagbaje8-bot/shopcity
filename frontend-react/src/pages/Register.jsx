@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext.jsx';
+import API_BASE from '../api';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
-    const res = await fetch('/register', {
+    const res = await fetch('${API_BASE}/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

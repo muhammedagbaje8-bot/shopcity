@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../AuthContext.jsx';
+import API_BASE from '../api';
 
 export default function ProductDetail() {
   const { id } = useParams();

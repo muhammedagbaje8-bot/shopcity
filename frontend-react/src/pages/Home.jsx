@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import API_BASE from '../api';
 
 const CATEGORIES = [
   { icon: '👟', label: 'Fashion' },
@@ -13,7 +14,7 @@ export default function Home() {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    fetch('/products')
+    fetch('${API_BASE}/products')
       .then(res => res.json())
       .then(data => setFeatured(data.slice(0, 4)))
       .catch(() => setFeatured([]));

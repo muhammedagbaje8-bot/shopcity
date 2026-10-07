@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import API_BASE from '../api';
 
 export default function OrderHistory() {
   const [orders, setOrders] = useState([]);
@@ -8,7 +9,7 @@ export default function OrderHistory() {
   function loadOrders() {
     setLoading(true);
     setError(false);
-    fetch('/orders', { credentials: 'include' })
+    fetch('${API_BASE}/orders', { credentials: 'include' })
       .then(res => res.json())
       .then(data => { setOrders(data); setLoading(false); })
       .catch(() => { setError(true); setLoading(false); });
