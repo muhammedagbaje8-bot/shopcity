@@ -6,7 +6,7 @@ const CATEGORIES = [
   { icon: '👟', label: 'Fashion' },
   { icon: '🎧', label: 'Electronics' },
   { icon: '🛋️', label: 'Home & Living' },
-  { icon: '💄', label: 'Beauty' },
+  { icon: '💄', label: 'Beauty Items' },
   { icon: '🏀', label: 'Sports' },
 ];
 
