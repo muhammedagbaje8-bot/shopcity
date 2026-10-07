@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import api from './pages/api';
+ import API_BASE from './pages/api';
 
 const AuthContext = createContext(null);
 
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    fetch('${API_BASE}/logout', { method: 'POST', credentials: 'include' });
+    fetch('/logout', { method: 'POST', credentials: 'include' });
     setUser(null);
     localStorage.removeItem('user');
   }
